@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/overview.svg" alt="Visual overview of Segment Anything Model" width="100%">
+  <img src="assets/system-map.svg" alt="Detailed system map for Segment Anything Model" width="100%">
 </p>
 
 # Segment Anything Model
@@ -26,20 +26,34 @@ The shared `hermes-skill-` prefix identifies this as a portable Hermes workflow 
 | What is delivered? | A skill contract, examples, safety guidance, release checks, and rendered SVG diagrams. |
 | Runtime status | Documentation-first reference package; connect it to the tools available in your own environment. |
 
-## How it works
+## Visual system map
 
-<p align="center">
-  <img src="assets/workflow.svg" alt="Step-by-step workflow for Segment Anything Model" width="760">
-</p>
+The diagram below is specific to this capability. It shows the real components and artifacts involved rather than a generic agent loop.
 
-1. Translate the request into a bounded creative brief
-2. Inspect supplied assets and usage constraints
-3. Choose the appropriate format and production path
-4. Create a first reviewable artifact
-5. Check legibility, fidelity, and export behavior
-6. Deliver the artifact with revision guidance
+![Segment Anything Model system map](assets/system-map.svg)
 
-See [How it works](docs/HOW-IT-WORKS.md) for the detailed walkthrough, decision points, and verification checklist.
+## Operation sequence
+
+![Segment Anything Model actor and data sequence](assets/operation-sequence.svg)
+
+1. Load and normalize the source image
+2. Choose positive points boxes or prior mask
+3. Encode image features once
+4. Decode candidate object masks
+5. Compare confidence and edge quality
+6. Export mask cutout and overlay preview
+
+See [How it works](docs/HOW-IT-WORKS.md) for the component-by-component walkthrough and evidence model.
+
+## Example visual output
+
+![Illustrative output produced by Segment Anything Model](assets/example-output.svg)
+
+This is an explanatory mockup of the output shape—not fabricated proof that a live run occurred. The labels show the information a real result should expose for review.
+
+## Decision and stop conditions
+
+![Decision guide for Segment Anything Model](assets/decision-guide.svg)
 
 ## Inputs
 
@@ -61,10 +75,6 @@ More scenarios and expected results are in [Examples](docs/EXAMPLES.md).
 
 ## Safety and trust model
 
-<p align="center">
-  <img src="assets/safety-boundary.svg" alt="Safety and approval boundaries for Segment Anything Model" width="900">
-</p>
-
 This workflow is designed around inspection and evidence; uncertainty must remain visible. It must stop when ownership, authorization, target state, or publication safety is ambiguous. Never place credentials, private endpoints, personal data, or environment-specific secrets in the skill package or its evidence.
 
 Read [SAFETY.md](SAFETY.md) and [SECURITY.md](SECURITY.md) before connecting the workflow to real accounts, devices, repositories, or production data.
@@ -85,7 +95,10 @@ Read [SAFETY.md](SAFETY.md) and [SECURITY.md](SECURITY.md) before connecting the
 | `docs/HOW-IT-WORKS.md` | Expanded walkthrough with diagrams and verification points. |
 | `docs/EXAMPLES.md` | Realistic safe, review-only, and stop-condition scenarios. |
 | `docs/RELEASE.md` | Checks to complete before publishing a revision. |
-| `assets/*.svg` | Accessible, GitHub-rendered visual explanations. |
+| `assets/system-map.svg` | Capability-specific block, graph, stack, loop, or canvas architecture. |
+| `assets/operation-sequence.svg` | Actor and data sequence using the skill’s real stages. |
+| `assets/example-output.svg` | Illustrated mockup of the artifact or interface a run should produce. |
+| `assets/decision-guide.svg` | Capability-specific decisions, approval boundaries, and stop states. |
 | `tests/README.md` | Manual contract and package validation guidance. |
 | `SAFETY.md` / `SECURITY.md` | Operational and disclosure boundaries. |
 
