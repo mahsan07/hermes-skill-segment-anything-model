@@ -1,0 +1,3 @@
+{
+  "task": "Use Segment Anything Model to use sam for zero-shot image segmentation with points, boxes, or masks and return verification evidence."
+}

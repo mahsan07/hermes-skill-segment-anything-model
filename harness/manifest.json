@@ -1,0 +1,85 @@
+{
+  "protocol_version": "0.1",
+  "skill": {
+    "id": "hermes-skill-segment-anything-model",
+    "display_name": "Segment Anything Model",
+    "description": "Use SAM for zero-shot image segmentation with points, boxes, or masks."
+  },
+  "task_profile": {
+    "category": "creative",
+    "architecture": "pipeline",
+    "artifact": "canvas",
+    "inputs": [
+      "Source image",
+      "Point box or mask prompt"
+    ],
+    "outputs": [
+      "Segmentation overlays",
+      "Point +",
+      "Box prompt",
+      "Mask score .94",
+      "Transparent PNG"
+    ]
+  },
+  "modules": {
+    "memory": {
+      "strategy": "stage_artifact_log",
+      "responsibility": "Retain source image plus decisions, observations, and verification evidence needed to resume safely."
+    },
+    "planning": {
+      "strategy": "linear_gated_plan",
+      "responsibility": "Transform point box or mask prompt into the ordered, bounded stages defined by this skill."
+    },
+    "action": {
+      "strategy": "brief_generate_render_inspect_export",
+      "responsibility": "Advance the workflow through sam image encoder while preserving stop conditions and user authority."
+    },
+    "capability": {
+      "strategy": "task_conditioned_minimum_capability_set",
+      "responsibility": "Expose only the production and rendering capabilities needed for the requested artifact and format."
+    }
+  },
+  "execution": {
+    "stages": [
+      "Load and normalize the source image",
+      "Choose positive points boxes or prior mask",
+      "Encode image features once",
+      "Decode candidate object masks",
+      "Compare confidence and edge quality",
+      "Export mask cutout and overlay preview"
+    ],
+    "gates": [
+      "scope_and_authority_confirmed",
+      "capability_and_dependency_preflight",
+      "consequential_action_previewed_when_applicable",
+      "output_reopened_and_verified"
+    ]
+  },
+  "verification": {
+    "evidence": [
+      "Point +",
+      "Box prompt",
+      "Mask score .94",
+      "Transparent PNG"
+    ],
+    "metrics": [
+      "task_success",
+      "verification_pass_rate",
+      "tool_error_rate",
+      "repair_count",
+      "latency_ms",
+      "estimated_cost_usd"
+    ]
+  },
+  "failure_policy": {
+    "max_repairs": 2,
+    "schema_error": "repair_then_stop",
+    "permission_error": "stop_without_retry",
+    "verification_failure": "report_incomplete"
+  },
+  "maturity": {
+    "level": "executable_contract",
+    "runtime_scope": "validation_and_dry_run_planning",
+    "claim_boundary": "This repository validates and plans the harness contract; it does not claim live service execution or benchmark gains without a connected adapter and measured evidence."
+  }
+}
